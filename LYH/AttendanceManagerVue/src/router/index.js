@@ -29,7 +29,7 @@ export default new Router({
         title: '登录'
       },
       children:[
-        
+
       ]
     },
     {
@@ -62,6 +62,10 @@ export default new Router({
               path: '/fixedAssets',
               name: 'fixedAssets',
               component: ()=> import ('@/pages/work/apply/fixedAssets'),
+            },{
+              path: '/attendanceAssets',
+              name: 'attendanceAssets',
+              component: ()=> import ('@/pages/work/apply/attendanceAssets'),
             },{
               path: '/leave',
               name: 'leave',

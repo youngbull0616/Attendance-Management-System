@@ -5,9 +5,9 @@
 
       <el-menu-item index="1" @click="goTo('/task')"><span class="navigation">我的任务</span></el-menu-item>
       <el-menu-item index="2" @click="goTo('/fixedAssets')"><span class="navigation">资产申请</span></el-menu-item>
-      <el-menu-item index="3" @click="goTo('/leave')"><span class="navigation">请假申请</span></el-menu-item>
-      <el-menu-item index="4" @click="goTo('/check')"><span class="navigation">我的考勤</span></el-menu-item>
-
+      <el-menu-item index="3" @click="goTo('/attendanceAssets')"><span class="navigation">绩效申请</span></el-menu-item>
+      <el-menu-item index="4" @click="goTo('/leave')"><span class="navigation">请假申请</span></el-menu-item>
+      <el-menu-item index="5" @click="goTo('/check')"><span class="navigation">我的考勤</span></el-menu-item>
       <el-menu-item index="6" @click="goTo('/customer')"><span class="navigation">我的客户</span></el-menu-item>
       <el-menu-item index="7" @click="goTo('/meeting')"><span class="navigation">我的会议</span></el-menu-item>
       <el-menu-item index="8" @click="goTo('/notice')"><span class="navigation">我的通知</span></el-menu-item>
