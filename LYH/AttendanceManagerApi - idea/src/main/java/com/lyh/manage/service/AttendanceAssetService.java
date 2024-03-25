@@ -57,6 +57,8 @@ public class AttendanceAssetService {
             return 0;
     }
 
+    public boolean updateAdminScore(String id, String adminScore) { return attendanceAssetsDao.updateAdminScore(id,adminScore); }
+
     public AttendanceAssets selectById(String id) {
         return attendanceAssetsDao.selectById(id);
     }

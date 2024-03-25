@@ -40,6 +40,10 @@ public class Task {
 
     private String statusName;
 
+    private String selfScore;
+
+    private String adminScore;
+
     public String getId() {
         return id;
     }
@@ -158,5 +162,21 @@ public class Task {
 
     public void setStatusName(String statusName) {
         this.statusName = statusName;
+    }
+
+    public String getSelfScore() {
+        return selfScore;
+    }
+
+    public void setSelfScore(String selfScore) {
+        this.selfScore = selfScore;
+    }
+
+    public String getAdminScore() {
+        return adminScore;
+    }
+
+    public void setAdminScore(String adminScore) {
+        this.adminScore = adminScore;
     }
 }

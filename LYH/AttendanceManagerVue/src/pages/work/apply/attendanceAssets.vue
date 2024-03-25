@@ -10,7 +10,7 @@
             <span style="color: green; float: left;" v-if="item.isPass">{{ item.statusName }}</span>
             <span style="color: gray; float: left;" v-else-if="item.isNotApproval">{{ item.statusName }}</span>
             <span style="color: red; float: left;" v-else>{{ item.statusName }}</span>
-            <span>{{ ruleForm.employeeName }}的{{item.month}}月绩效考核申请</span>
+            <span>{{ ruleForm.employeeName }}的绩效考核申请</span>
             <el-button class="button" type="text" style="float: right; padding: 3px 0"
               @click="handleUpdate(item)">查看详情</el-button>
           </div>

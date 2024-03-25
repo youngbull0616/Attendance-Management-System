@@ -185,6 +185,20 @@
       </if>
       where a.id = #{applyID}
     </if>
+    <if test="type == '绩效审批'">
+      ,a.selfScore, a.adminScore, a.approvalID, a.employeeNumber, a.applyTime, a.status
+      <if test="status == 1 or status == 2">
+        ,b.approvalTime
+        ,(select employeeName from employee f where b.approvalNumber = f.employeeNumber) as approvalName
+      </if>
+      ,(select employeeName from employee d where a.employeeNumber = d.employeeNumber) as applyName
+      ,(select name from tasktype e where a.taskTypeID = e.id) as type
+      from attendanceassets a
+      <if test="status == 1 or status == 2">
+        join task b on a.approvalID = b.id join employee c on b.applyNumber = c.employeeNumber
+      </if>
+      where a.id = #{applyID}
+    </if>
   </select>
 
   <select id="getAll" resultType="com.lyh.manage.entity.Task">

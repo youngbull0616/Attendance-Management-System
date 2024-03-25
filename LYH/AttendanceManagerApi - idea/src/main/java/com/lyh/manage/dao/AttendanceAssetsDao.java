@@ -22,4 +22,6 @@ public interface AttendanceAssetsDao {
 
     List<AttendanceAssets> findByEmployeeNumber(@Param("number")String number);
 
+    boolean updateAdminScore(@Param("id")String id,@Param("adminScore")String adminScore);
+
 }

@@ -47,6 +47,12 @@
         <el-form-item label="请假事由" v-if="isLeave">
           <el-input type="textarea" v-model="form.reason" readonly />
         </el-form-item>
+        <el-form-item label="自评得分" v-if="isAttendance">
+          <el-input v-model="form.selfScore" readonly />
+        </el-form-item>
+        <el-form-item label="管理员得分" v-if="isAttendance">
+          <el-input type="textarea" v-model="form.adminScore"/>
+        </el-form-item>
         <el-form-item label="固定资产编号" v-if="isFixed">
           <el-input v-model="form.number" readonly />
         </el-form-item>
@@ -87,6 +93,7 @@ export default {
       isLeave: false,
       isFixed: false,
       isShow: false,
+      isAttendance: false,
       isApproval: true,
     }
   },
@@ -99,11 +106,11 @@ export default {
         receiveNumber: sessionStorage.getItem("username")
       }).then(res => {
         if(!document.cookie.split(';').some(c => c.trim().startsWith('LOGIN='))) {
-          
+
           this.$router.push("/");
           this.$message({ message: "未登录或登录信息过期", type: "error" });
           return
-        } 
+        }
         this.tableData = res.data;
       })
     },
@@ -128,17 +135,38 @@ export default {
         this.dialogFormVisible = true
         if (res.data.taskTypeID == 1) {
           this.isFixed = false;
+          this.isAttendance = false;
           this.isLeave = true;
         } else if (res.data.taskTypeID == 2) {
           this.isLeave = false;
+          this.isAttendance = false;
           this.isFixed = true;
+        }else if (res.data.taskTypeID == 4) {
+          this.isLeave = false;
+          this.isFixed =false;
+          this.isAttendance = true;
         }
       })
     },
     approval(advice) {
+      const adminScore = this.form.adminScore.toString();
+
       this.form1.advice = advice;
       this.form1.approvalTime = this.getTime();
       this.form1.approvalNumber = sessionStorage.getItem("username");
+      console.log(typeof adminScore);
+      if(this.form1.typeID === '4'){
+        console.log("更改adminScore:",this.form1.applyID,adminScore)
+        axios.post("/attendanceAsset/updateAdminScore", this.form1, {
+          params: { score: adminScore }}// 确保adminScore是一个字符串
+        ).then(res => {
+          if (res.data.code == 200) {
+            this.dialogFormVisible = false
+            this.$message({ message: "审批成功", type: "success" });
+            this.getData();
+          }
+        })
+      }
       //this.form1 = Object.assign({advice: advice}, this.form1)
       axios.post("/task/approval", this.form1).then(res => {
         if (res.data.code == 200) {

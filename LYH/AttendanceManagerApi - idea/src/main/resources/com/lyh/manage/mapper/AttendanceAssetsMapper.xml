@@ -12,17 +12,17 @@
     <result column="status" property="status" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, selfScore, adminScore, approvalID, employeeNumber, taskTypeID, applyTime, status
+    a.id, a.selfScore, a.adminScore, a.approvalID, a.employeeNumber, a.taskTypeID, a.applyTime, a.status
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
-    from attendanceassets
-    where id = #{id}
+    from attendanceassets a
+    where a.id = #{id}
   </select>
   <delete id="deleteById" parameterType="java.lang.String" >
-    delete from attendanceassets
-    where id = #{id}
+    delete from attendanceassets a
+    where a.id = #{id}
   </delete>
   <insert id="insert" parameterType="com.lyh.manage.entity.AttendanceAssets" >
     insert into attendanceassets (
@@ -66,16 +66,22 @@
   <select id="getAll" resultType="com.lyh.manage.entity.AttendanceAssets">
     select
     <include refid="Base_Column_List" />
-    from attendanceassets
+    from attendanceassets a
   </select>
 
 
   <select id="findByEmployeeNumber" parameterType="java.lang.String" resultType="com.lyh.manage.entity.AttendanceAssets">
     select
     <include refid="Base_Column_List" />
-    from attendanceassets
-    where employeeNumber = #{number}
-    order by applyTime
+    from attendanceassets a
+    where a.employeeNumber = #{number}
+    order by a.applyTime
   </select>
+
+  <update id="updateAdminScore" parameterType="map">
+    UPDATE attendanceassets
+    SET adminScore = #{adminScore}
+    WHERE id = #{id}
+  </update>
 
 </mapper>

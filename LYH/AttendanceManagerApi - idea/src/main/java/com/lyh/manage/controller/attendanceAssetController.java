@@ -3,6 +3,7 @@ package com.lyh.manage.controller;
 import com.lyh.manage.config.Result;
 import com.lyh.manage.config.ResultCode;
 import com.lyh.manage.entity.AttendanceAssets;
+import com.lyh.manage.entity.Task;
 import com.lyh.manage.service.AttendanceAssetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,9 +36,11 @@ public class attendanceAssetController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public int update(@RequestBody AttendanceAssets attendanceAssets){
-        return attendanceAssetService.update(attendanceAssets);
+    @RequestMapping(value = "/updateAdminScore",method = RequestMethod.POST)
+    public boolean update(@RequestBody Task task, @RequestParam String score){
+        String id = task.getApplyID();
+        AttendanceAssets att = attendanceAssetService.selectById(id);
+        return attendanceAssetService.updateAdminScore(id,score);
     }
 
     @ResponseBody
@@ -51,5 +54,6 @@ public class attendanceAssetController {
     public List<AttendanceAssets> findByEmployeeNumber(@RequestBody AttendanceAssets attendanceAssets){
         return attendanceAssetService.findByEmployeeNumber(attendanceAssets.getEmployeeNumber());
     }
+
 
 }

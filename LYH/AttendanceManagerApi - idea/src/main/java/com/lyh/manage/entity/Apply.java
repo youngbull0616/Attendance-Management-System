@@ -60,6 +60,10 @@ public class Apply {
 
     private String employeeNumber;
 
+    private String selfScore;
+
+    private String adminScore;
+
     public String getId() {
         return id;
     }
@@ -210,5 +214,21 @@ public class Apply {
 
     public void setApprovalName(String approvalName) {
         this.approvalName = approvalName;
+    }
+
+    public String getSelfScore() {
+        return selfScore;
+    }
+
+    public void setSelfScore(String selfScore) {
+        this.selfScore = selfScore;
+    }
+
+    public String getAdminScore() {
+        return adminScore;
+    }
+
+    public void setAdminScore(String adminScore) {
+        this.adminScore = adminScore;
     }
 }
